@@ -75,6 +75,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\BoolToTandemTypeConverter.cs" />
     <Compile Include="Helpers\BoolToVisitibilityConverter.cs" />
+    <Compile Include="Helpers\FileCopyHelper.cs" />
     <Compile Include="Helpers\IOExtensions.cs" />
     <Compile Include="Helpers\MyCommand.cs" />
     <Compile Include="Helpers\TandemTypeToStringConverter.cs" />
