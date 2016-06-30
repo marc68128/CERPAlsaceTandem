@@ -5,9 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CERPAlsaceTandem"
         mc:Ignorable="d"
-        Title="ProgressWindow" Height="300" Width="300">
+        Title="ProgressWindow" Height="200" Width="500">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <ProgressBar Margin="20" IsIndeterminate="True"></ProgressBar>
+        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+            <TextBlock>Progression total :</TextBlock>
+            <ProgressBar x:Name="TotalProgressBar" Value="0" Maximum="100"></ProgressBar>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <TextBlock x:Name="FileText"></TextBlock>
+            <ProgressBar x:Name="FileProgressBar" Value="0" Maximum="100"></ProgressBar>
+        </StackPanel>
     </Grid>
 </Window>

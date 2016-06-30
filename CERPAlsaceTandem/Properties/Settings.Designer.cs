@@ -58,5 +58,17 @@ namespace CERPAlsaceTandem.Properties {
                 this["ThemeAccent"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ReplaceFile {
+            get {
+                return ((bool)(this["ReplaceFile"]));
+            }
+            set {
+                this["ReplaceFile"] = value;
+            }
+        }
     }
 }

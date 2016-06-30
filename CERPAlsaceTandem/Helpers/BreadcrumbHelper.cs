@@ -16,9 +16,8 @@ namespace CERPAlsaceTandem.Helpers
         public static void GotoPage(Page page)
         {
             if (_pageCurrent != null)
-            {
                 PageStack.Push(_pageCurrent);
-            }
+
             SwitchDisplayTo(page);
         }
 
@@ -30,8 +29,14 @@ namespace CERPAlsaceTandem.Helpers
 
         private static void SwitchDisplayTo(Page page)
         {
+            CheckSelectedPassenger();
             MainWindow.Content = page;
             _pageCurrent = page;
+        }
+
+        private static void CheckSelectedPassenger()
+        {
+            UserSelection.SelectedPassenger?.UpdatePhotoAndVideoCount();
         }
     }
 }

@@ -31,7 +31,10 @@ namespace CERPAlsaceTandem.ViewModels
 
             SelectedPassenger = UserSelection.SelectedPassenger;
 
-            List<PhotoCollection> photoCollection = new List<PhotoCollection>(); ;
+            List<PhotoCollection> photoCollection = new List<PhotoCollection>(); 
+            List<VideoCollection> videoCollection = new List<VideoCollection>();
+
+            #region Photos
 
             if (IOExtensions.GetDirectoriesRecursiv(path, "*CANON").Any()) //Canon folders
             {
@@ -43,11 +46,30 @@ namespace CERPAlsaceTandem.ViewModels
                 var collection = new PhotoCollection(images);
                 photoCollection.Add(collection);
             }
-            Videos = new List<VideoCollection> { new VideoCollection(videos.ToList()) };
 
+            #endregion
+
+            #region Videos
+
+            var listVideo = new List<VideoFileViewModel>();
+            foreach (var video in videos.OrderBy(x => x.Date))
+            {
+                if (video.Duration > new TimeSpan(0, 0, 3))
+                {
+                    listVideo.Add(video);
+                }
+                else
+                {
+                    videoCollection.Add(new VideoCollection(listVideo));
+                    listVideo = new List<VideoFileViewModel>();
+                }
+            }
+
+            #endregion
+
+            Videos = videoCollection;
             Photos = photoCollection;
-
-            Debug.WriteLine("DriveVM Loaded : " + s.ElapsedMilliseconds + " ms");
+            
         }
 
         public PassengerViewModel SelectedPassenger { get; set; }

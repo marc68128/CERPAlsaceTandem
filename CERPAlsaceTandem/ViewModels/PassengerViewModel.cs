@@ -45,13 +45,7 @@ namespace CERPAlsaceTandem.ViewModels
             else
                 TandemType = TandemType.VideoPhoto;
 
-            PhotoCount =
-                IOExtensions.PhotoExtensions.Select(e => IOExtensions.GetFilesRecursiv(RootPath, e).Count)
-                    .Sum();
-
-            VideoCount =
-                IOExtensions.VideoExtensions.Select(e => IOExtensions.GetFilesRecursiv(RootPath, e).Count)
-                    .Sum();
+            UpdatePhotoAndVideoCount();
         }
 
         public MyCommand OpenPhotoFolderCommand { get; set; }
@@ -86,6 +80,17 @@ namespace CERPAlsaceTandem.ViewModels
             }
         }
 
+
+        public void UpdatePhotoAndVideoCount()
+        {
+            PhotoCount =
+              IOExtensions.PhotoExtensions.Select(e => IOExtensions.GetFilesRecursiv(RootPath, e).Count)
+                  .Sum();
+
+            VideoCount =
+                IOExtensions.VideoExtensions.Select(e => IOExtensions.GetFilesRecursiv(RootPath, e).Count)
+                    .Sum();
+        }
 
     }
 }

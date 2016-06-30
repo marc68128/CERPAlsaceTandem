@@ -38,3 +38,45 @@ C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsace
 C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\UserControls\PassengerBox.baml
 C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\ProgressWindow.g.cs
 C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\ProgressWindow.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\CERPAlsaceTandem.exe.config
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.exe
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.pdb
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\CERPAlsaceTandem.exe
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\CERPAlsaceTandem.pdb
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\MahApps.Metro.dll
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\System.Windows.Interactivity.dll
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\MahApps.Metro.pdb
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\MahApps.Metro.xml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.csprojResolveAssemblyReference.cache
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\MainWindow.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\ProgressWindow.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\UserControls\FolderPicker.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\UserControls\PassengerBox.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\DrivePage.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\InsertDiskPage.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\NoPathPage.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\PassengersView.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\SettingsPage.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\App.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem_MarkupCompile.cache
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem_MarkupCompile.lref
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\App.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\MainWindow.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\ProgressWindow.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\UserControls\FolderPicker.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\UserControls\PassengerBox.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\DrivePage.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\InsertDiskPage.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\NoPathPage.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\PassengersView.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Views\SettingsPage.baml
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.g.resources
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.Properties.Resources.resources
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.csproj.GenerateResource.Cache
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Interop.Shell32.dll
+C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.csproj.ResolveComReference.cache
