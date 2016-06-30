@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="CERPAlsaceTandem.UserControls.PassengerBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CERPAlsaceTandem.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border Grid.Row="2" BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="15">
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Margin="10,0,15,0" FontWeight="Bold" Grid.Column="0" Grid.Row="0">Nom du passager :</TextBlock>
+            <TextBlock Margin="10,0,15,0" FontWeight="Bold" Grid.Column="0" Grid.Row="1">Type de tandem :</TextBlock>
+            <TextBlock Margin="10,0,15,0" FontWeight="Bold" Grid.Column="0" Grid.Row="2">Date :</TextBlock>
+            <TextBlock Margin="10,0,15,0" FontWeight="Bold" Grid.Column="0" Grid.Row="3">Préstation :</TextBlock>
+
+            <TextBlock Grid.Column="1" Grid.Row="0" FontSize="15" Text="{Binding FullName}"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IsCEP, Converter={StaticResource BoolToTandemTypeConverter}}"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Date, StringFormat=D}"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding TandemType, Converter={StaticResource TandemTypeToStringConverter}}"></TextBlock>
+
+            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" MouseLeftButtonDown="OpenPhotoFolder" Visibility="{Binding PhotoFolderExist, Converter={StaticResource BoolToVisitibilityConverter}}">
+                <Image Margin="10" Height="100" Width="100" Source="/Images/folderPhoto.png"></Image>
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15">
+                    <Ellipse Height="30" Width="30" Fill="Black"></Ellipse>
+                    <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PhotoCount}"></TextBlock>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding VideoFolderExist, Converter={StaticResource BoolToVisitibilityConverter}}">
+                <Image Margin="10" Height="100" Width="100" Source="/Images/folderVideo.png"></Image>
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15">
+                    <Ellipse Height="30" Width="30" Fill="Black"></Ellipse>
+                    <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding VideoCount}"></TextBlock>
+                </Grid>
+            </Grid>
+
+            <Button Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Command="{Binding GoToPassengerSelectionCommand}" Content="Sélectionner un autre passager"></Button>
+
+        </Grid>
+    </Border>
+</UserControl>

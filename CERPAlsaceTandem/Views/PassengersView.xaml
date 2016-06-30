@@ -1,0 +1,64 @@
+﻿<Page x:Class="CERPAlsaceTandem.Views.PassengersView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CERPAlsaceTandem.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="PassengerView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Image Source="/Images/CERPA.png" HorizontalAlignment="Center"></Image>
+        <Grid Grid.Row="1" Margin="20,20,20,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="20" Text="Veuillez sélectionner un passager :"></TextBlock>
+            <StackPanel Margin="10,0" Grid.Column="2" Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding ShowPhoto, Mode=TwoWay}"></CheckBox>
+                <TextBlock VerticalAlignment="Center" Text="photo"></TextBlock>
+            </StackPanel>
+            <StackPanel Margin="10,0" Grid.Column="3" Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding ShowVideo, Mode=TwoWay}"></CheckBox>
+                <TextBlock VerticalAlignment="Center" Text="video"></TextBlock>
+            </StackPanel>
+            <TextBox Text="{Binding SearchTerm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="4"></TextBox>
+            
+        </Grid>
+        <StackPanel Margin="20,0" Grid.Row="2" HorizontalAlignment="Stretch" Height="2" Background="{StaticResource AccentColorBrush4}"></StackPanel>
+        <ScrollViewer Grid.Row="3">
+            <ListBox Margin="20" ItemsSource="{Binding Passengers}" SelectedItem="{Binding SelectedPassenger, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock FontSize="15" Text="{Binding FullName}"></TextBlock>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding IsCEP, Converter={StaticResource BoolToTandemTypeConverter}}"></TextBlock>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0" Text="{Binding Date, StringFormat=d}"></TextBlock>
+                            <TextBlock TextAlignment="Right" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1" Text="{Binding TandemType, Converter={StaticResource TandemTypeToStringConverter}}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</Page>
