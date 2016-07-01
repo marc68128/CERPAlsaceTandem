@@ -30,16 +30,26 @@ namespace CERPAlsaceTandem.Models
         public string LastPath { get; set; }
 
         public MyCommand CopyCommand { get; set; }
+        public MyCommand CopyAndRemoveCommand { get; set; }
 
         private void InitCommand()
         {
             CopyCommand = new MyCommand(null, async () =>
             {
-                var count = await FileCopyHelper.Copy(this, UserSelection.SelectedPassenger);
+                var files = await FileCopyHelper.Copy(this, UserSelection.SelectedPassenger);
                 if(typeof(T) == typeof(PhotoFileViewModel))
-                    UserSelection.SelectedPassenger.PhotoCount += count;
+                    UserSelection.SelectedPassenger.PhotoCount += files.Count;
                 else
-                    UserSelection.SelectedPassenger.VideoCount += count;
+                    UserSelection.SelectedPassenger.VideoCount += files.Count;
+            });
+
+            CopyAndRemoveCommand = new MyCommand(null, async () =>
+            {
+                var files = await FileCopyHelper.CopyAndRemove(this, UserSelection.SelectedPassenger);
+                if (typeof(T) == typeof(PhotoFileViewModel))
+                    UserSelection.SelectedPassenger.PhotoCount += files.Count;
+                else
+                    UserSelection.SelectedPassenger.VideoCount += files.Count;
             });
         }
     }

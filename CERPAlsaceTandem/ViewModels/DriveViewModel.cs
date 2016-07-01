@@ -23,8 +23,8 @@ namespace CERPAlsaceTandem.ViewModels
             var imageFilter = new[] { "*.jpg", "*.JPG", "*.png", "*.PNG" };
             var videoFilter = new[] { "*.avi", "*.AVI", "*.mkv", "*.MKV" };
 
-            var images = imageFilter.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Select(p => new PhotoFileViewModel(p)).ToList();
-            var videos = videoFilter.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Select(p => new VideoFileViewModel(p)).ToList();
+            var images = imageFilter.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new PhotoFileViewModel(p)).ToList();
+            var videos = videoFilter.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new VideoFileViewModel(p)).ToList();
 
             ImageCount = images.Count();
             VideoCount = videos.Count();

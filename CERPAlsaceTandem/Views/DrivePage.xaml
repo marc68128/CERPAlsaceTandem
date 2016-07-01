@@ -30,12 +30,12 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" MaxHeight="200" Grid.RowSpan="3" Grid.Column="0">
-                            <Image HorizontalAlignment="Stretch" Margin="10" Source="{Binding FirstPath}" MaxHeight="200" MaxWidth="200"></Image>
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" MaxHeight="200" Grid.RowSpan="3" Grid.Column="2">
-                            <Image HorizontalAlignment="Stretch" Margin="10" Source="{Binding LastPath}" MaxHeight="200" MaxWidth="200"></Image>
-                        </StackPanel>
+                        <Grid Grid.Row="0" HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.Column="0">
+                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding FirstPath}" Stretch="Uniform"></Image>
+                        </Grid>
+                        <Grid Grid.Row="0" HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.Column="2">
+                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding LastPath}" Stretch="Uniform"></Image>
+                        </Grid>
                         <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock FontSize="18" TextAlignment="Center">
                                 <Run FontWeight="Bold" Text="{Binding Count, Mode=OneWay}"></Run>
@@ -55,7 +55,7 @@
                         </TextBlock>
 
                         <StackPanel Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <Button Margin="10" VerticalAlignment="Bottom">Copier et effacer</Button>
+                            <Button Margin="10" VerticalAlignment="Bottom" Command="{Binding CopyAndRemoveCommand}">Copier et effacer</Button>
                             <Button Margin="10" VerticalAlignment="Bottom" Command="{Binding CopyCommand}">Copier</Button>
                         </StackPanel>
                     </Grid>
@@ -97,6 +97,7 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
