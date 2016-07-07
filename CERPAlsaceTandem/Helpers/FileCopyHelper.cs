@@ -20,6 +20,7 @@ namespace CERPAlsaceTandem.Helpers
             var filesToRemove = await Copy(files, passenger);
             foreach (var file in filesToRemove)
             {
+                FileTmpDebuger.CheckFile(file, "123");
                 File.Delete(file);
                 if (Directory.GetFileSystemEntries(Path.GetDirectoryName(file)).Length == 0)
                     Directory.Delete(Path.GetDirectoryName(file));
@@ -80,7 +81,8 @@ namespace CERPAlsaceTandem.Helpers
                     int percentage = (i + 1) * 100 / files.Count;
                     string currentAction = "Copie de " + Path.GetFileName(fileVM.Path) + " en cours...";
                     string newFilePath = Path.Combine(destination, Path.GetFileName(fileVM.Path));
-
+                    FileTmpDebuger.CheckFile(fileVM.Path, "1 - " + i);
+                    FileTmpDebuger.CheckFile(newFilePath, "2 - " + i);
 
                     Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                     {
@@ -118,6 +120,8 @@ namespace CERPAlsaceTandem.Helpers
                     if (File.Exists(newFilePath))
                         copiedFiles.Add(fileVM.Path);
 
+                    FileTmpDebuger.CheckFile(fileVM.Path, "3 - " + i);
+                    FileTmpDebuger.CheckFile(newFilePath, "4 - " + i);
 
                 }
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => progress.Hide()));

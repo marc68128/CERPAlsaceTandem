@@ -31,10 +31,10 @@
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0" HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.Column="0">
-                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding FirstPath}" Stretch="Uniform"></Image>
+                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding FirstImage}" Stretch="Uniform"></Image>
                         </Grid>
                         <Grid Grid.Row="0" HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.Column="2">
-                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding LastPath}" Stretch="Uniform"></Image>
+                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding LastImage}" Stretch="Uniform"></Image>
                         </Grid>
                         <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock FontSize="18" TextAlignment="Center">
