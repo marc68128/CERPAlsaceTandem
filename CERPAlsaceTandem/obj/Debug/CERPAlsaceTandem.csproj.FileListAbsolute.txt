@@ -80,3 +80,5 @@ C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.Propert
 C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.csproj.GenerateResource.Cache
 C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Interop.Shell32.dll
 C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.csproj.ResolveComReference.cache
+C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\Interop.Shell32.dll
+C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\CERPAlsaceTandem.csproj.ResolveComReference.cache

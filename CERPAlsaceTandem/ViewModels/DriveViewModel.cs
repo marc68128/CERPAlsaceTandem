@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using CERPAlsaceTandem.Helpers;
 using CERPAlsaceTandem.Models;
 
@@ -20,18 +21,15 @@ namespace CERPAlsaceTandem.ViewModels
 
             var path = d.RootDirectory.FullName;
 
-            var imageFilter = new[] { "*.jpg", "*.JPG", "*.png", "*.PNG" };
-            var videoFilter = new[] { "*.avi", "*.AVI", "*.mkv", "*.MKV" };
-
-            var images = imageFilter.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new PhotoFileViewModel(p)).ToList();
-            var videos = videoFilter.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new VideoFileViewModel(p)).ToList();
+            var images = IOExtensions.PhotoExtensions.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new PhotoFileViewModel(p)).ToList();
+            var videos = IOExtensions.VideoExtensions.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new VideoFileViewModel(p)).ToList();
 
             ImageCount = images.Count();
             VideoCount = videos.Count();
 
             SelectedPassenger = UserSelection.SelectedPassenger;
 
-            List<PhotoCollection> photoCollection = new List<PhotoCollection>(); 
+            List<PhotoCollection> photoCollection = new List<PhotoCollection>();
             List<VideoCollection> videoCollection = new List<VideoCollection>();
 
             #region Photos
@@ -69,7 +67,14 @@ namespace CERPAlsaceTandem.ViewModels
 
             Videos = videoCollection;
             Photos = photoCollection;
-            
+
+            var test = new CompositeCollection();
+            var cc1 = new CollectionContainer { Collection = videoCollection };
+            var cc2 = new CollectionContainer { Collection = photoCollection };
+            test.Add(cc1);
+            test.Add(cc2);
+            Files = test;
+
         }
 
         public PassengerViewModel SelectedPassenger { get; set; }
@@ -120,6 +125,18 @@ namespace CERPAlsaceTandem.ViewModels
                 _photos = value;
             }
         }
+
+        private CompositeCollection _files;
+        public CompositeCollection Files
+        {
+            get { return _files; }
+            set
+            {
+                OnPropertyChanged();
+                _files = value;
+            }
+        }
+
 
     }
 }

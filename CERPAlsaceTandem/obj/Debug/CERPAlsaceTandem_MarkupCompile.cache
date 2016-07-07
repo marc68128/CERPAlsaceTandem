@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\
+C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsaceTandem\obj\Debug\
 CERPAlsaceTandem
 none
 false
 DEBUG;TRACE
-C:\Projects\CERPAlsaceTandem\CERPAlsaceTandem\App.xaml
+C:\Users\14827\documents\visual studio 2015\Projects\CERPAlsaceTandem\CERPAlsaceTandem\App.xaml
 9903599043
 
 35107050570
-201305295894
+20-141041693
 MainWindow.xaml;ProgressWindow.xaml;UserControls\FolderPicker.xaml;UserControls\PassengerBox.xaml;Views\DrivePage.xaml;Views\InsertDiskPage.xaml;Views\NoPathPage.xaml;Views\PassengersView.xaml;Views\SettingsPage.xaml;
 
 False

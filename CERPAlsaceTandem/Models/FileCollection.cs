@@ -54,5 +54,10 @@ namespace CERPAlsaceTandem.Models
         }
     }
 
+     public abstract class FileCollection : FileCollection<FileViewModel> {
+         protected FileCollection(List<FileViewModel> list) : base(list)
+         {
+         }
+     }
 
 }

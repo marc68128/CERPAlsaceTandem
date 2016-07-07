@@ -10,7 +10,7 @@ namespace CERPAlsaceTandem.Helpers
     public static class IOExtensions
     {
         public static string[] PhotoExtensions = new[] { "*.jpg" };
-        public static string[] VideoExtensions = new[] { "*.avi", "*.mkv" };
+        public static string[] VideoExtensions = new[] { "*.avi", "*.mkv", "*.mp4" };
         public static List<string> GetFilesRecursiv(string path, string searchPattern)
         {
             var files = Directory.GetFiles(path, searchPattern).ToList();

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CERPAlsaceTandem.Views"
       xmlns:userControls="clr-namespace:CERPAlsaceTandem.UserControls"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="DrivePage">
 
     <Grid>
@@ -14,7 +14,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding Photos}">
+        <ListView ItemsSource="{Binding Files}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{StaticResource AccentColorBrush}" Margin="20">
