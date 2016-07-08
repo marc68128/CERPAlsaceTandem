@@ -36,7 +36,7 @@ namespace CERPAlsaceTandem.ViewModels
             IsPhoto = folderNameinfos[6].ToLower().Contains("photos");
             IsVideo = folderNameinfos[6].ToLower().Contains("video");
 
-            OpenPhotoFolderCommand = new MyCommand(null, () => Process.Start(PhotoPath));
+            OpenPhotoFolderCommand = new MyCommand(arg => Process.Start(PhotoPath));
 
             if (!IsVideo)
                 TandemType = TandemType.Photo;

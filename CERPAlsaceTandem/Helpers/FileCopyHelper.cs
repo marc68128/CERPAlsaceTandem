@@ -15,25 +15,27 @@ namespace CERPAlsaceTandem.Helpers
 {
     public static class FileCopyHelper
     {
-        public static async Task<List<string>> CopyAndRemove<T>(FileCollection<T> files, PassengerViewModel passenger) where T : FileViewModel
+
+        public static void Remove(IEnumerable<string> filesToRemove)
         {
-            var filesToRemove = await Copy(files, passenger);
             foreach (var file in filesToRemove)
             {
-                FileTmpDebuger.CheckFile(file, "123");
                 File.Delete(file);
                 if (Directory.GetFileSystemEntries(Path.GetDirectoryName(file)).Length == 0)
                     Directory.Delete(Path.GetDirectoryName(file));
             }
+        }
 
+        public static async Task<List<string>> CopyAndRemove(FileCollection files, PassengerViewModel passenger)
+        {
+            var filesToRemove = await Copy(files, passenger);
+            Remove(filesToRemove);
             return filesToRemove;
         }
 
-        public static async Task<List<string>> Copy<T>(FileCollection<T> files, PassengerViewModel passenger) where T : FileViewModel
+        public static async Task<List<string>> Copy(FileCollection files, PassengerViewModel passenger)
         {
-            var isPhoto = typeof(T) == typeof(PhotoFileViewModel);
-
-            if (isPhoto)
+            if (files.FileType == FileType.Photo)
             {
                 if (UserSelection.SelectedPassenger.IsPhoto)
                 {
@@ -68,7 +70,7 @@ namespace CERPAlsaceTandem.Helpers
 
         }
 
-        private static async Task<List<string>> Copy<T>(FileCollection<T> files, string destination) where T : FileViewModel
+        private static async Task<List<string>> Copy(FileCollection files, string destination) 
         {
             ProgressWindow progress = new ProgressWindow();
             progress.Show();
@@ -78,11 +80,9 @@ namespace CERPAlsaceTandem.Helpers
                 for (int i = 0; i < files.Count; i++)
                 {
                     var fileVM = files[i];
-                    int percentage = (i + 1) * 100 / files.Count;
+                    int percentage = (i) * 100 / files.Count;
                     string currentAction = "Copie de " + Path.GetFileName(fileVM.Path) + " en cours...";
                     string newFilePath = Path.Combine(destination, Path.GetFileName(fileVM.Path));
-                    FileTmpDebuger.CheckFile(fileVM.Path, "1 - " + i);
-                    FileTmpDebuger.CheckFile(newFilePath, "2 - " + i);
 
                     Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                     {
@@ -111,7 +111,13 @@ namespace CERPAlsaceTandem.Helpers
                         while ((currentBlockSize = source.Read(buffer, 0, buffer.Length)) > 0)
                         {
                             totalBytes += currentBlockSize;
-                            Application.Current.Dispatcher.BeginInvoke((Action)(() => progress.FileProgress = Convert.ToInt32(Math.Round((double)totalBytes * 100.0 / source.Length))));
+                            var fileProgress = Convert.ToInt32(Math.Round((double)totalBytes * 100.0 / source.Length));
+                            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                            {
+                                progress.FileProgress = fileProgress;
+
+                                progress.TotalProgress = percentage + (fileProgress / files.Count);
+                            }));
                             dest.Write(buffer, 0, currentBlockSize);
                         }
                     }
@@ -119,9 +125,6 @@ namespace CERPAlsaceTandem.Helpers
                     //Check if file has been copied
                     if (File.Exists(newFilePath))
                         copiedFiles.Add(fileVM.Path);
-
-                    FileTmpDebuger.CheckFile(fileVM.Path, "3 - " + i);
-                    FileTmpDebuger.CheckFile(newFilePath, "4 - " + i);
 
                 }
                 Application.Current.Dispatcher.BeginInvoke((Action)(() => progress.Hide()));

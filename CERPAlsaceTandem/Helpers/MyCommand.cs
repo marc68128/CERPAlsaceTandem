@@ -9,31 +9,76 @@ namespace CERPAlsaceTandem.Helpers
 {
     public class MyCommand : ICommand
     {
-        private Func<bool> _canExecuteFunc;
-        private Action _execute; 
-        public MyCommand(Func<bool> canExecute, Action execute)
-        {
-            if (canExecute != null)
-                _canExecuteFunc = canExecute;
-            else
-                _canExecuteFunc = () => true;
+        private Action<object> _execute;
 
-            if (execute != null)
-                _execute = execute;
-            else
-                _execute = () => { };
+        private Predicate<object> _canExecute;
+
+        private event EventHandler CanExecuteChangedInternal;
+
+        public MyCommand(Action<object> execute): this(execute, DefaultCanExecute)
+        {
+        }
+
+        public MyCommand(Action<object> execute, Predicate<object> canExecute)
+        {
+            if (execute == null)
+            {
+                throw new ArgumentNullException("execute");
+            }
+
+            if (canExecute == null)
+            {
+                throw new ArgumentNullException("canExecute");
+            }
+
+            this._execute = execute;
+            this._canExecute = canExecute;
+        }
+
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+                this.CanExecuteChangedInternal += value;
+            }
+
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+                this.CanExecuteChangedInternal -= value;
+            }
         }
 
         public bool CanExecute(object parameter)
         {
-            return _canExecuteFunc.Invoke();
+            return this._canExecute != null && this._canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            _execute.Invoke();
+            this._execute(parameter);
         }
 
-        public event EventHandler CanExecuteChanged;
+        public void OnCanExecuteChanged()
+        {
+            EventHandler handler = this.CanExecuteChangedInternal;
+            if (handler != null)
+            {
+                //DispatcherHelper.BeginInvokeOnUIThread(() => handler.Invoke(this, EventArgs.Empty));
+                handler.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        public void Destroy()
+        {
+            this._canExecute = _ => false;
+            this._execute = _ => { return; };
+        }
+
+        private static bool DefaultCanExecute(object parameter)
+        {
+            return true;
+        }
     }
 }

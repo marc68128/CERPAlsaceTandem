@@ -16,8 +16,8 @@ namespace CERPAlsaceTandem.ViewModels
     {
         public BaseViewModel()
         {
-            GoBackCommand = new MyCommand(null, () => BreadcrumbHelper.GoBack());
-            GoToPassengerSelectionCommand = new MyCommand(null, () => BreadcrumbHelper.GotoPage(new PassengersView()));
+            GoBackCommand = new MyCommand(arg => BreadcrumbHelper.GoBack());
+            GoToPassengerSelectionCommand = new MyCommand(arg => BreadcrumbHelper.GotoPage(new PassengersView()));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -14,67 +15,19 @@ namespace CERPAlsaceTandem.ViewModels
 {
     public class DriveViewModel : BaseViewModel
     {
+        private string _path;
+
         public DriveViewModel(DriveInfo d)
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
-
-            var path = d.RootDirectory.FullName;
-
-            var images = IOExtensions.PhotoExtensions.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new PhotoFileViewModel(p)).ToList();
-            var videos = IOExtensions.VideoExtensions.SelectMany(f => IOExtensions.GetFilesRecursiv(path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new VideoFileViewModel(p)).ToList();
-
-            ImageCount = images.Count();
-            VideoCount = videos.Count();
-
+            _path = d.RootDirectory.FullName;
             SelectedPassenger = UserSelection.SelectedPassenger;
-
-            List<PhotoCollection> photoCollection = new List<PhotoCollection>();
-            List<VideoCollection> videoCollection = new List<VideoCollection>();
-
-            #region Photos
-
-            if (IOExtensions.GetDirectoriesRecursiv(path, "*CANON").Any()) //Canon folders
+            ReloadCommand = new MyCommand(arg =>
             {
-                var grouped = images.GroupBy(i => Path.GetDirectoryName(i.Path)).ToList();
-                photoCollection.AddRange(grouped.Select(g => new PhotoCollection(g.ToList())));
-            }
-            else
-            {
-                var collection = new PhotoCollection(images);
-                photoCollection.Add(collection);
-            }
+                LoadData();
+                SelectedPassenger.UpdatePhotoAndVideoCount();
+            });
 
-            #endregion
-
-            #region Videos
-
-            var listVideo = new List<VideoFileViewModel>();
-            foreach (var video in videos.OrderBy(x => x.Date))
-            {
-                if (video.Duration > new TimeSpan(0, 0, 3))
-                {
-                    listVideo.Add(video);
-                }
-                else
-                {
-                    videoCollection.Add(new VideoCollection(listVideo));
-                    listVideo = new List<VideoFileViewModel>();
-                }
-            }
-
-            #endregion
-
-            Videos = videoCollection;
-            Photos = photoCollection;
-
-            var test = new CompositeCollection();
-            var cc1 = new CollectionContainer { Collection = videoCollection };
-            var cc2 = new CollectionContainer { Collection = photoCollection };
-            test.Add(cc1);
-            test.Add(cc2);
-            Files = test;
-
+            LoadData();
         }
 
         public PassengerViewModel SelectedPassenger { get; set; }
@@ -102,7 +55,6 @@ namespace CERPAlsaceTandem.ViewModels
             }
         }
 
-
         private List<VideoCollection> _videos;
         public List<VideoCollection> Videos
         {
@@ -113,7 +65,6 @@ namespace CERPAlsaceTandem.ViewModels
                 _videos = value;
             }
         }
-
 
         private List<PhotoCollection> _photos;
         public List<PhotoCollection> Photos
@@ -126,17 +77,70 @@ namespace CERPAlsaceTandem.ViewModels
             }
         }
 
-        private CompositeCollection _files;
-        public CompositeCollection Files
+        private ObservableCollection<FileCollection> _files;
+        public ObservableCollection<FileCollection> Files
         {
             get { return _files; }
             set
             {
-                OnPropertyChanged();
                 _files = value;
+                OnPropertyChanged();
             }
         }
 
+        public MyCommand ReloadCommand { get; set; }
+
+        private void LoadData()
+        {
+            var images = IOExtensions.PhotoExtensions.SelectMany(f => IOExtensions.GetFilesRecursiv(_path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new PhotoFileViewModel(p)).ToList();
+            var videos = IOExtensions.VideoExtensions.SelectMany(f => IOExtensions.GetFilesRecursiv(_path, f)).Where(p => !p.StartsWith(".")).Distinct().Select(p => new VideoFileViewModel(p)).ToList();
+
+            ImageCount = images.Count();
+            VideoCount = videos.Count();
+
+            List<PhotoCollection> photoCollection = new List<PhotoCollection>();
+            List<VideoCollection> videoCollection = new List<VideoCollection>();
+
+            #region Photos
+
+            if (IOExtensions.GetDirectoriesRecursiv(_path, "*CANON").Any()) //Canon folders
+            {
+                var grouped = images.GroupBy(i => Path.GetDirectoryName(i.Path)).ToList();
+                photoCollection.AddRange(grouped.Select(g => new PhotoCollection(g.ToList())));
+            }
+            else
+            {
+                var collection = new PhotoCollection(images);
+                photoCollection.Add(collection);
+            }
+
+            #endregion
+
+            #region Videos
+
+            var listVideo = new List<VideoFileViewModel>();
+            foreach (var video in videos.OrderBy(x => x.Date))
+            {
+                if (video.Duration > new TimeSpan(0, 0, 3))
+                {
+                    listVideo.Add(video);
+                }
+                else
+                {
+                    videoCollection.Add(new VideoCollection(listVideo));
+                    listVideo = new List<VideoFileViewModel>();
+                }
+            }
+            videoCollection.Add(new VideoCollection(listVideo));
+
+            #endregion
+
+            videoCollection.ToList().ForEach(x => x.Changed += (sender, args) => ReloadCommand.Execute(null));
+            photoCollection.ToList().ForEach(x => x.Changed += (sender, args) => ReloadCommand.Execute(null));
+
+            Files = new ObservableCollection<FileCollection>(videoCollection.Concat(photoCollection.Cast<FileCollection>()).ToList());
+
+        }
 
     }
 }

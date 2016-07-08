@@ -18,6 +18,7 @@
             <helpers:BoolToTandemTypeConverter x:Key="BoolToTandemTypeConverter"></helpers:BoolToTandemTypeConverter>
             <helpers:TandemTypeToStringConverter x:Key="TandemTypeToStringConverter"></helpers:TandemTypeToStringConverter>
             <helpers:BoolToVisitibilityConverter x:Key="BoolToVisitibilityConverter"></helpers:BoolToVisitibilityConverter>
+            <helpers:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter"></helpers:TimeSpanToStringConverter>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

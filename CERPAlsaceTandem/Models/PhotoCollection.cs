@@ -12,10 +12,12 @@ using CERPAlsaceTandem.ViewModels;
 
 namespace CERPAlsaceTandem.Models
 {
-    public class PhotoCollection : FileCollection<PhotoFileViewModel>
+    public class PhotoCollection : FileCollection
     {
-        public PhotoCollection(List<PhotoFileViewModel> list) : base(list)
+        public PhotoCollection(IEnumerable<PhotoFileViewModel> list) : base(list)
         {
+            FileType = FileType.Photo;
+
             BitmapImage firstImage = new BitmapImage();
             firstImage.BeginInit();
             firstImage.CacheOption = BitmapCacheOption.OnLoad;
@@ -34,27 +36,6 @@ namespace CERPAlsaceTandem.Models
 
         }
 
-        private BitmapImage _firstImage;
-        public BitmapImage FirstImage
-        {
-            get { return _firstImage; }
-            set
-            {
-                _firstImage = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private BitmapImage _lastImage;
-        public BitmapImage LastImage
-        {
-            get { return _lastImage; }
-            set
-            {
-                _lastImage = value;
-                OnPropertyChanged();
-            }
-        }
 
     }
 }

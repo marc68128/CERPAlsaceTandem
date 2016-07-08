@@ -47,6 +47,10 @@
       <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NReco.VideoConverter, Version=1.1.1.0, Culture=neutral, PublicKeyToken=395ccb334978a0cd, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.VideoConverter.1.1.1\lib\net20\NReco.VideoConverter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -76,12 +80,13 @@
     <Compile Include="Helpers\BoolToTandemTypeConverter.cs" />
     <Compile Include="Helpers\BoolToVisitibilityConverter.cs" />
     <Compile Include="Helpers\FileCopyHelper.cs" />
-    <Compile Include="Helpers\FileTmpDebuger.cs" />
     <Compile Include="Helpers\IOExtensions.cs" />
     <Compile Include="Helpers\MyCommand.cs" />
     <Compile Include="Helpers\TandemTypeToStringConverter.cs" />
+    <Compile Include="Helpers\TimeSpanToStringConverter.cs" />
     <Compile Include="Helpers\UserSelection.cs" />
     <Compile Include="Models\FileCollection.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\PhotoCollection.cs" />
     <Compile Include="Models\TandemType.cs" />
     <Compile Include="Models\VideoCollection.cs" />
@@ -213,6 +218,11 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\copy-icon.png" />
+    <Resource Include="Images\copyAndRemove-icon.png" />
+    <Resource Include="Images\remove-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

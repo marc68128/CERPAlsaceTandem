@@ -14,50 +14,92 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding Files}">
+        <ListView ItemsSource="{Binding Files, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{StaticResource AccentColorBrush}" Margin="20">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.Column="0">
-                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding FirstImage}" Stretch="Uniform"></Image>
-                        </Grid>
-                        <Grid Grid.Row="0" HorizontalAlignment="Stretch" Grid.RowSpan="3" Grid.Column="2">
-                            <Image HorizontalAlignment="Stretch" Margin="10" MaxHeight="200" Source="{Binding LastImage}" Stretch="Uniform"></Image>
-                        </Grid>
-                        <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock FontSize="18" TextAlignment="Center">
-                                <Run FontWeight="Bold" Text="{Binding Count, Mode=OneWay}"></Run>
-                                <Run Text=" Photos"></Run>
+                        <Grid Grid.Column="0" Margin="10" HorizontalAlignment="Center" x:Name="FirstGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock TextAlignment="Center" Grid.Row="0" FontSize="18" FontWeight="Bold" Margin="5">
+                                <Run Text="{Binding Count, Mode=OneWay}"></Run>
+                                <Run Text=" "></Run>
+                                <Run Text="{Binding FileType}"></Run>
                             </TextBlock>
-                            <Path Data="M 0 8 L 32 8 L 20 0 M 32 8 L 20 16" Margin="0,10,0,0" Stroke="Black" HorizontalAlignment="Center"></Path>
-                        </StackPanel>
 
-                        <TextBlock Margin="10" Grid.Row="0" Grid.Column="3">
-                            <Run Text="Du "></Run>
-                            <Run Text="{Binding FirstDate, StringFormat=g}"></Run>
-                        </TextBlock>
 
-                        <TextBlock Margin="10" Grid.Row="1" Grid.Column="3">
-                            <Run Text="Au "></Run>
-                            <Run Text="{Binding LastDate, StringFormat=g}"></Run>
-                        </TextBlock>
+                            <TextBlock Grid.Row="1" Margin="5">
+                            <Run FontWeight="Bold" Text="Du : "></Run>
+                            <Run Text="{Binding FirstDate, StringFormat=f}"></Run>
+                            </TextBlock>
 
-                        <StackPanel Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
-                            <Button Margin="10" VerticalAlignment="Bottom" Command="{Binding CopyAndRemoveCommand}">Copier et effacer</Button>
-                            <Button Margin="10" VerticalAlignment="Bottom" Command="{Binding CopyCommand}">Copier</Button>
-                        </StackPanel>
+                            <TextBlock  Grid.Row="2" Margin="5">
+                            <Run FontWeight="Bold" Text="Au  :"></Run>
+                            <Run Text="{Binding LastDate, StringFormat=f}"></Run>
+                            </TextBlock>
+
+                            <TextBlock  Grid.Row="3" Margin="5">
+                            <Run FontWeight="Bold" Text="Durée  :"></Run>
+                            <Run Text="{Binding ElapsedTime, Converter={StaticResource TimeSpanToStringConverter}}"></Run>
+                            </TextBlock>
+
+                            <Grid Grid.Row="4" Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Button ToolTip="Copier les fichiers" Grid.Column="0" HorizontalAlignment="Center" Command="{Binding CopyCommand}" Background="Transparent" BorderBrush="Transparent">
+                                    <Image Source="/Images/copy-icon.png" Height="50"  HorizontalAlignment="Center"></Image>
+                                </Button>
+
+                                <Button ToolTip="Copier et supprimer les fichiers" Grid.Column="1" HorizontalAlignment="Center" Command="{Binding CopyAndRemoveCommand}" Background="Transparent" BorderBrush="Transparent">
+                                    <Image Source="/Images/copyAndRemove-icon.png" Height="50"  HorizontalAlignment="Center"></Image>
+                                </Button>
+
+                                <Button ToolTip="Supprimer les fichiers" Grid.Column="2" HorizontalAlignment="Center" Command="{Binding RemoveCommand}" Background="Transparent" BorderBrush="Transparent">
+                                    <Image Source="/Images/remove-icon.png" Height="50"  HorizontalAlignment="Center"></Image>
+                                </Button>
+                            </Grid>
+
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column=" 0" HorizontalAlignment="Stretch" >
+                                <Image HorizontalAlignment="Stretch" Margin="10" Width="250" Height="{Binding ActualHeight, ElementName=FirstGrid}"  Source="{Binding FirstImage}" Stretch="UniformToFill"></Image>
+                            </Grid>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Path Data="M 0 8 L 32 8 L 20 0 M 32 8 L 20 16" Margin="0,10,0,0" Stroke="Black" HorizontalAlignment="Center"></Path>
+                            </StackPanel>
+
+                            <Grid Grid.Row="0" Grid.Column="2">
+                                <Image HorizontalAlignment="Stretch" Margin="10" Width="250" Height="{Binding ActualHeight, ElementName=FirstGrid}" Source="{Binding LastImage}" Stretch="UniformToFill"></Image>
+                            </Grid>
+
+                        </Grid>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -74,22 +116,8 @@
                                         </VisualStateGroup>
                                         <VisualStateGroup x:Name="SelectionStates">
                                             <VisualState x:Name="Unselected" />
-                                            <VisualState x:Name="Selected">
-                                                <Storyboard>
-                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="border"
-                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                                                        <EasingColorKeyFrame KeyTime="0" Value="LightBlue" />
-                                                    </ColorAnimationUsingKeyFrames>
-                                                </Storyboard>
-                                            </VisualState>
-                                            <VisualState x:Name="SelectedUnfocused">
-                                                <Storyboard>
-                                                    <ColorAnimationUsingKeyFrames Storyboard.TargetName="border"
-                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                                                        <EasingColorKeyFrame KeyTime="0" Value="SkyBlue" />
-                                                    </ColorAnimationUsingKeyFrames>
-                                                </Storyboard>
-                                            </VisualState>
+                                            <VisualState x:Name="Selected"></VisualState>
+                                            <VisualState x:Name="SelectedUnfocused"></VisualState>
                                         </VisualStateGroup>
                                     </VisualStateManager.VisualStateGroups>
                                     <ContentPresenter/>
